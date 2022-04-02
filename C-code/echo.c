@@ -11,25 +11,50 @@
                                                                                                | $$
 _______________________________________________________________________________________________|___________
 This program is to create a simple clone of the echo command while using case switching.
-2022/04/1
+2022/04/2
 **************************************************************/
 #include <stdio.h>
-#include <string.h>
+#include <unistd.h>
 
-void echoArgs(char **argv[]);
+//args function argv needs to be ** which is a pointer to pointer
+void args(int argc,char **argv,int opt);
 
-int main(int argc, char *argv[]){
-  if (argc == 2) {
-    echoArgs(*argv[]);
-  }
 
+// begining of the main running function.
+int main(int argc, char *argv[]) {
+  int opt;
+  //calls the args function.
+  args(argc, argv, opt);
 }
 
-void echoArgs(char **argv[]){
-  if(argv[1][1] == '-'){
-    switch(argv){
-      case 'h':printf("this program print's what you type\n");
-      default: printf("expected input.");
+
+void args(int argc,char **argv,int opt){
+  /*
+  this is the code for running with getopt and the ":f:hv" defines
+  what commands are going to be recognized by getopt and the :f: defines input
+  for f.
+  */
+    while((opt = getopt(argc, argv, ":f:hv"))!= -1){
+      switch (opt) {
+        case 'f':
+          printf("%s\n", optarg);
+          break;
+
+        case 'h':
+          printf("This program is a clone of the echo command\n");
+          break;
+
+        case'v':
+          printf("Version:0.01\n");
+          break;
+
+        case ':':
+          printf("Option needs a value\n");
+          break;
+
+        case '?':
+          printf("unknown option: %c\n", optopt);
+          break;
+      }
     }
-  }
 }

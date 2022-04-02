@@ -1,45 +1,9 @@
 #include <stdio.h>
-#include <string.h>
 
-void info();
-void help();
-void numbs();
-void greet(char *name);
-
-
-int main(int x, char *y[]){
-  if(x == 1){
-    info();
+int main(int argc, char **argv) {
+  printf("hello world - %d\n", argc );
+  for (int i = 0; i < argc; i++) {
+    printf("arg %d - %s,\n", i, argv[i]);
   }
-
-  if(x == 2){
-    if( strcmp(y[1], "-h") == 0){
-      help();
-    }
-    if( strcmp(y[1], "-d") == 0){
-      numbs();
-    }
-    else{
-      greet(y[1]);
-    }
-  }
-
-
-
-}
-
-void info(){
-  printf("type -h for more info.\n");
-}
-
-void help(){
-  printf("type: hello {name} for a proper greeting.\n");
-}
-
-void numbs(){
-  printf("1234\n");
-}
-
-void greet(char *name){
-  printf("Hey yo whas up %s\n", name);
+  return 0;
 }
