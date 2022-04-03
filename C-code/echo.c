@@ -48,7 +48,7 @@ void args(int argc,char **argv,int opt){
               i++;
             }
           printf("\n");
-          break;
+          return;
 
         case 'h':
           printf("This program is a clone of the echo command.\n"
@@ -58,24 +58,36 @@ void args(int argc,char **argv,int opt){
                   "-c          Capitalizes all letters inputed.\n"
                   "-h          Brings you to this prompt.\n"
                   "-v          Shows the version\n");
-          break;
+          return;
 
         case 'v':
           printf("Version:0.01\n");
-          break;
+          return;
 
         case ':':
           printf("Value required\n");
-          break;
+          return;
 
         case '?':
           printf("type -h to get help\n");
-          break;
+          return;
       }
     }
 
     if(argc == 1){
       printf("type -h to get help\n");
     }
+
+    else if(argc == 2){
+      printf("%s\n", argv[optind]);
+    }
+
+    else{
+      for(; optind < argc; optind++){
+        printf("%s ", argv[optind]);
+      }
+      printf("\n");
+    }
+
 
 }
